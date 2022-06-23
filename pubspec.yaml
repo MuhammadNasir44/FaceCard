@@ -49,6 +49,17 @@ dev_dependencies:
   flutter_svg:
   syncfusion_flutter_charts: ^20.1.61
   flutter_rating_bar:
+  get:
+  get_it:
+  provider: ^6.0.2
+  cloud_firestore: ^3.1.17
+  percent_indicator: ^4.2.2
+  modal_progress_hud_nsn: ^0.1.0-nullsafety-1
+  firebase_auth:
+  firebase_core:
+  firebase_messaging:
+  firebase_storage:
+  image_picker:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

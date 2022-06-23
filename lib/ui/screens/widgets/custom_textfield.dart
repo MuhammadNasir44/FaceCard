@@ -4,9 +4,24 @@ class customTextField extends StatelessWidget {
   final hinttext;
   final prefixIcon;
 
+  final onChanged;
+  final validator;
+  final controller;
+  final sufFixIcon;
+  final textInputAction;
+  final keyBoardType;
+  final maxLine;
+
   customTextField({
     this.hinttext,
     this.prefixIcon,
+    this.onChanged,
+    this.validator,
+    this.controller,
+    this.sufFixIcon,
+    this.keyBoardType,
+    this.textInputAction,
+    this.maxLine
   });
 
   @override
@@ -14,6 +29,7 @@ class customTextField extends StatelessWidget {
     return Container(
       // margin: EdgeInsets.only(left: 20, right: 20),
       child: TextFormField(
+        onChanged: onChanged,
         // minLines: ,
         decoration: InputDecoration(
           border: const OutlineInputBorder(

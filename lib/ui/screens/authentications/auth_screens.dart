@@ -3,6 +3,7 @@
 
 
 import 'package:face_card/core/constants/colors.dart';
+import 'package:face_card/ui/screens/authentications/login/login_screens.dart';
 import 'package:face_card/ui/screens/authentications/signup/sign_up_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +119,7 @@ class AuthScreen extends StatelessWidget {
                             color: Color(0xffF2C921), fontSize: 15),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreens()));
                             // navigate to desired screen
                           }
                     ),

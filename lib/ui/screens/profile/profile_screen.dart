@@ -5,119 +5,132 @@
 
 import 'package:face_card/core/constants/colors.dart';
 import 'package:face_card/core/constants/style.dart';
+import 'package:face_card/ui/screens/profile/profile_provider.dart';
+import 'package:face_card/ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../widgets/icons_texts.dart';
 class ProfileScreen extends StatelessWidget {
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xff5C2CC8),
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        title:Row(
-          children: [
+    return ChangeNotifierProvider(
+      create:(context)=>ProfileProvider(),
+      child: Consumer<ProfileProvider>(
+        builder: (context,model,child) {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Color(0xff5C2CC8),
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              title: Row(
+                children: [
 
-             GestureDetector(onTap: (() {}), child: Icon(Icons.menu)),
-            SizedBox(width: 20,),
-            Text('Edit Profile'),
+                  GestureDetector(onTap: (() {}), child: Icon(Icons.menu)),
+                  SizedBox(width: 20,),
+                  Text('Edit Profile'),
 
 
-          ],
-        ) ,
+                ],
+              ),
 
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: GestureDetector(onTap: () {}, child: Icon(Icons.edit)),
-          ),
-        ],
-      ),
-      body: Container(
-        decoration: gradients,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 30),
-          child: Column(
-            children: [
-              CircleAvatar(
-                radius: 80,
-                backgroundImage: AssetImage(
-                  'images/batman.png',
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: GestureDetector(onTap: () {}, child: Icon(Icons.edit)),
                 ),
-                child: Text(''),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
+              ],
+            ),
+            body: Container(
+              decoration: gradients,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Theresa Khan',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      'Your Text Second Lines Goes Here',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    icon_texts(
-                        icon: Icons.call,
-                        txt1: 'Phone Number',
-                        txt2: '+92 000 00000'),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    icon_texts(
-                      icon: Icons.location_city,
-                      txt1: 'Location',
-                      txt2: 'US',
+                    CircleAvatar(
+                      radius: 80,
+                      backgroundImage: AssetImage(
+                        'images/batman.png',
+                      ),
+                      child: Text(''),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
-                    icon_texts(
-                      icon: Icons.mail,
-                      txt1: 'Email Address',
-                      txt2: 'EmailAddress@gmail.com',
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    icon_texts(
-                      icon: Icons.password_outlined,
-                      txt1: 'Password',
-                      txt2: '**********',
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    icon_texts(
-                      icon: Icons.privacy_tip_rounded,
-                      txt1: 'Privacy Policy',
-                      txt2: "",
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    icon_texts(
-                      icon: Icons.logout,
-                      txt1: 'LogOut',
-                      txt2: '',
+                    Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            model.appUser.userName==null?'Theresa Khan':model.appUser.userName.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            'Your Text Second Lines Goes Here',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          icon_texts(
+                              icon: Icons.call,
+                              txt1: 'Phone Number',
+                              txt2: '+92 000 00000'),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          icon_texts(
+                            icon: Icons.location_city,
+                            txt1: 'Location',
+                            txt2: 'US',
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          icon_texts(
+                            icon: Icons.mail,
+                            txt1: 'Email Address',
+                            txt2: 'EmailAddress@gmail.com',
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          icon_texts(
+                            icon: Icons.password_outlined,
+                            txt1: 'Password',
+                            txt2: '**********',
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          icon_texts(
+                            icon: Icons.privacy_tip_rounded,
+                            txt1: 'Privacy Policy',
+                            txt2: "",
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          icon_texts(
+                            onPressed: ()async{
+                              await model.locateUser.logoutUser();
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashScreen()));
+                            },
+                            icon: Icons.logout,
+                            txt1: 'LogOut',
+                            txt2: '',
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
