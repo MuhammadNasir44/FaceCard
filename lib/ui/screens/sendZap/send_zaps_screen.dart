@@ -1,25 +1,31 @@
-import 'package:face_card/core/constants/style.dart';
-import 'package:face_card/ui/screens/top_zapper/top_zipper_provider.dart';
-import 'package:face_card/ui/screens/ziprequests/zip_request_screen.dart';
+
+
+
+import 'package:face_card/ui/screens/sendZap/send_zaps_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../core/constants/colors.dart';
+import '../../../core/constants/style.dart';
 import '../../../core/enums/view_state.dart';
 import '../../../core/models/appusers_model.dart';
 import '../widgets/search_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-class TopZapper extends StatelessWidget {
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../ziprequests/zip_request_screen.dart';
+
+
+class SendZapsScreen extends StatelessWidget {
 
   final getZaps;
-   TopZapper({this.getZaps});
 
+  SendZapsScreen({this.getZaps});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context)=>TopZipperProvider(),
-      child: Consumer<TopZipperProvider>(
+      create: (context)=>SendZapsProvider(),
+      child: Consumer<SendZapsProvider>(
         builder: (context,model,child) {
           return Container(
             decoration: gradients,
@@ -28,28 +34,18 @@ class TopZapper extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Color(0xff5C2CC8),
                 elevation: 0,
-                title: Text('Top Zapper'),
-                leading: IconButton(
-                  onPressed: (){
-
-                    Navigator.pop(context);
-
-                  },
-                  icon: Icon(Icons.arrow_back_ios_new),
-                )
-                // actions: [
-                //   Padding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: GestureDetector(
-                //       onTap: (){
-                //         Navigator.pop(context);
-                //       },
-                //       child: Icon(
-                //         Icons.border_all_sharp,
-                //       ),
-                //     ),
-                //   )
-                // ],
+                title: Text('Send Zaps'),
+                leading: Icon(Icons.arrow_back_ios_new),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: Icon(
+                        Icons.border_all_sharp,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               body: ModalProgressHUD(
                 progressIndicator: CircularProgressIndicator(
@@ -58,50 +54,57 @@ class TopZapper extends StatelessWidget {
                 inAsyncCall: model.state == ViewState.busy,
                 child: SingleChildScrollView(
                   child: Container(
-                    margin: EdgeInsets.only(left: 15,right: 15),
+                    margin: EdgeInsets.only(left: 10,right: 10),
                     child: Column(
                       children: [
+
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("You selected: ${getZaps} zaps",
+                            style: TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        ),
+                        SizedBox(height: 10,),
                         SearchBar(
-                          hintText: 'Search Million Number of .Zaps',
+                          hintText: 'Search a user & send zaps',
                           onChanged: (value){
 
                             model.searchUserByName(value);
                           },
                         ),
+                        SizedBox(height: 10,),
                         ListView.builder(
                           shrinkWrap: true,
                           itemCount:model.isSearching==false? model.allAppUsers.length:model.searchedUsers.length,
-                          physics: ScrollPhysics(),
                           itemBuilder: (context, index) {
                             final currentPerson = personList[index];
                             return model.isSearching==false?Stack(
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    getZaps!=null?Navigator.push(
-                                        context, MaterialPageRoute(builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index],getZaps: getZaps,)))
-                                        :print("getzaps null");
+                                    Navigator.push(context,
 
-
-                                    },
+                                        MaterialPageRoute(builder: (context) =>
+                                        ZipRequests(selectedUser:model.allAppUsers[index],getZaps: getZaps,)));
+                                  },
                                   child: Container(
-                                    margin: EdgeInsets.only(top: 10),
+                                    margin: EdgeInsets.only(top: 7),
                                     child: Row(
                                       children: [
                                         const Padding(
-                                          padding: EdgeInsets.all(8.0),
+                                          padding: EdgeInsets.all(1.0),
                                           child: CircleAvatar(
                                             radius: 30,
                                             // backgroundImage:
                                             // AssetImage('images/person.jpg'),
                                           ),
                                         ),
+                                        SizedBox(width: 10,),
                                         Expanded(
                                           child: Container(
                                             height: 50,
                                             margin: EdgeInsets.only(
-                                                left: 10,
-                                                right: 10,
+                                                // left: 10,
+                                                // right: 10,
                                                 top: 2,
                                                 bottom: 2),
                                             decoration: BoxDecoration(
@@ -129,7 +132,6 @@ class TopZapper extends StatelessWidget {
                                                       Text(model.allAppUsers[index].description==""?"Here will be description":model.allAppUsers[index].description.toString(),
                                                         style: TextStyle(
                                                             color: Colors.grey),),
-
 
                                                     ],
                                                   ),
@@ -185,11 +187,10 @@ class TopZapper extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index],getZaps: getZaps,)));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => ZipRequests()));
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(top: 10),
@@ -280,7 +281,11 @@ class TopZapper extends StatelessWidget {
                                               size: 20,
                                             ),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+
+
+
+                                          },
 
                                           padding: EdgeInsets.all(0),
                                         ),
@@ -301,7 +306,4 @@ class TopZapper extends StatelessWidget {
       ),
     );
   }
-
-
-
 }

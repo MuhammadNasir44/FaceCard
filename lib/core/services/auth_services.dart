@@ -43,6 +43,8 @@ class AuthServices{
         this.appUser.appUserId = credential.user!.uid;
          this.isLogin = true;
         print("SignUpUserId=> ${this.appUser.appUserId}");
+        this.appUser.zaps = 50;
+        this.appUser.faceCardNumber = 0;
         await databaseServices.registerUser(appUser);
         this.appUser = await databaseServices.getUser(credential.user!.uid);
         customAuthResult.user = credential.user;

@@ -72,6 +72,12 @@ class SignUpScreen extends StatelessWidget {
                           height: 15,
                         ),
                         customTextField(
+                          textInputAction: TextInputAction.next,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Name can't be empty";
+                            }
+                          },
                           onChanged:(value){
                             model.appUser.userName = value;
                           },
@@ -85,6 +91,7 @@ class SignUpScreen extends StatelessWidget {
                           height: 15,
                         ),
                         customTextField(
+                          textInputAction: TextInputAction.next,
                           onChanged:(value){
                             model.appUser.phoneNumber = value;
                           },
@@ -98,6 +105,7 @@ class SignUpScreen extends StatelessWidget {
                           height: 15,
                         ),
                         customTextField(
+                          textInputAction: TextInputAction.next,
                           onChanged:(value){
                             model.appUser.userLocation = value;
                           },
@@ -111,6 +119,8 @@ class SignUpScreen extends StatelessWidget {
                           height: 15,
                         ),
                         customTextField(
+                          keyBoardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
                           onChanged:(value){
                             model.appUser.userEmail = value;
                           },
@@ -124,8 +134,14 @@ class SignUpScreen extends StatelessWidget {
                           height: 15,
                         ),
                         customTextField(
+                          textInputAction: TextInputAction.next,
                           onChanged:(value){
                             model.appUser.password = value;
+                          },
+                          validator: (value) {
+                            if (value == null || value.length<6) {
+                              return "password must not be less than 6 character";
+                            }
                           },
                           hinttext: 'Pasword',
                           prefixIcon: Icon(
@@ -242,6 +258,8 @@ class SignUpScreen extends StatelessWidget {
                                         color: Color(0xffF2C921), fontSize: 15),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
+
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreens()));
                                         // navigate to desired screen
                                       }),
                               ]),

@@ -29,7 +29,10 @@ class customTextField extends StatelessWidget {
     return Container(
       // margin: EdgeInsets.only(left: 20, right: 20),
       child: TextFormField(
+        validator: validator,
         onChanged: onChanged,
+        textInputAction: textInputAction,
+        keyboardType: keyBoardType,
         // minLines: ,
         decoration: InputDecoration(
           border: const OutlineInputBorder(

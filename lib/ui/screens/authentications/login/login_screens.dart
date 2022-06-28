@@ -66,6 +66,8 @@ class LoginScreens extends StatelessWidget {
                             ),
                             margin: EdgeInsets.only(left: 20, right: 20),
                             child: customTextField(
+
+                              textInputAction: TextInputAction.next,
                               onChanged: (value){
                                 model.appUser.userEmail=value;
                               },
@@ -86,6 +88,7 @@ class LoginScreens extends StatelessWidget {
                             ),
                             margin: EdgeInsets.only(left: 20, right: 20),
                             child: customTextField(
+                              textInputAction: TextInputAction.next,
                               onChanged: (value) {
                                 model.appUser.password =value;
 

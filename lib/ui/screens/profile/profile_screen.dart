@@ -77,14 +77,14 @@ class ProfileScreen extends StatelessWidget {
                           icon_texts(
                               icon: Icons.call,
                               txt1: 'Phone Number',
-                              txt2: '+92 000 00000'),
+                              txt2: model.appUser.phoneNumber==null?'+xx 000 00000':model.appUser.phoneNumber.toString()),
                           SizedBox(
                             height: 15,
                           ),
                           icon_texts(
                             icon: Icons.location_city,
                             txt1: 'Location',
-                            txt2: 'US',
+                            txt2: model.appUser.userLocation==null?'US':model.appUser.userLocation.toString(),
                           ),
                           SizedBox(
                             height: 15,
@@ -92,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                           icon_texts(
                             icon: Icons.mail,
                             txt1: 'Email Address',
-                            txt2: 'EmailAddress@gmail.com',
+                            txt2: model.appUser.userEmail==null?'EmailAddress@gmail.com':model.appUser.userEmail.toString(),
                           ),
                           SizedBox(
                             height: 15,

@@ -102,6 +102,7 @@ class AuthenticationProvider extends BaseViewModal {
       setState(ViewState.busy);
       appUser.createdAt = DateTime.now();
       appUser.lastEntry = DateTime.now();
+
       appUser.monthYear = monthYear.format(DateTime.now());
       ///================== Getting Pregnency Date ================
       customAuthResult = await _authServices.signUpUser(appUser);

@@ -17,6 +17,8 @@ class AppUser extends ChangeNotifier {
   double? initialWeight;
   String? monthYear;
   DateTime? lastEntry;
+  double? zaps;
+  double? faceCardNumber;
 
   AppUser({
     this.appUserId,
@@ -27,6 +29,7 @@ class AppUser extends ChangeNotifier {
     this.phoneNumber,
     this.description,
     this.password,
+    this.zaps,
     // this.confirmPassword,
     this.isFirstLogin,
     this.createdAt,
@@ -34,6 +37,7 @@ class AppUser extends ChangeNotifier {
     this.initialWeight,
     this.monthYear,
     this.lastEntry,
+    this.faceCardNumber,
   });
 
 
@@ -51,6 +55,8 @@ class AppUser extends ChangeNotifier {
     this.initialWeight=json['initialWeight'];
     this.monthYear = json['monthYear'];
     this.lastEntry = json['lastEntry'].toDate();
+    this.zaps = json['zaps'];
+    this.faceCardNumber = json['faceCardNumber'];
 
   }
   toJson() {
@@ -69,6 +75,8 @@ class AppUser extends ChangeNotifier {
       'monthYear':this.monthYear,
       'lastEntry':this.lastEntry,
       'userLocation':this.userLocation,
+      'zaps':this.zaps,
+      'faceCardNumber':this.faceCardNumber,
     };
   }
 
