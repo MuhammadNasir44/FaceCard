@@ -78,13 +78,15 @@ class RecievedZaps extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 10),
                                 child: Row(
                                   children: [
-                                    const Padding(
+                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: CircleAvatar(
                                         radius: 30,
-                                        // backgroundImage:
-                                        // AssetImage('images/person.jpg'),
-                                      ),
+                                        backgroundImage:data!['senderImage'] != null
+                                            ? NetworkImage("${data['senderImage']}")
+                                            : AssetImage('assets/images/pregnant_img.png') as ImageProvider,
+                                        child: Text(''),
+                                      )
                                     ),
                                     Expanded(
                                       child: Container(
@@ -112,14 +114,13 @@ class RecievedZaps extends StatelessWidget {
                                                 crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(data!['senderName'],
+                                                  Text(data['senderName'],
                                                     style: TextStyle(
                                                         fontWeight: FontWeight
                                                             .bold),),
-                                                  Text("Description",
+                                                  Text(data['senderDescription']==""?"Description":data['senderDescription'],
                                                     style: TextStyle(
                                                         color: Colors.grey),),
-
                                                 ],
                                               ),
 

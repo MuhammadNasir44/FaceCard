@@ -45,26 +45,28 @@ class SendZapsProvider extends BaseViewModal{
   }
 
 
-  sendZapsRequest(ZapRequestModel zapRequestModel,BuildContext ctx) async {
+  sendZapsRequest(ZapRequestModel zapRequestModel,var getOtherUserZaps,var getPesonalZaps, BuildContext ctx) async {
 
     var getFaceCardNO;
+    var getZaps;
 
     setState(ViewState.busy);
 
+
     await databaseServices.sendZapsRequest(zapRequestModel, zapRequestModel.receiverId.toString());
 
-    await databaseServices.updateotherUserProfile(zapRequestModel.numberOfZaps!.toDouble(),zapRequestModel.receiverId.toString());
+    await databaseServices.updateotherUserProfile(getOtherUserZaps,zapRequestModel.receiverId.toString());
 
-    getFaceCardNO = locater.appUser.faceCardNumber;
+    locater.appUser.zaps = locater.appUser.zaps! - getPesonalZaps;
 
-    print("Here is the getFacevard number:"+getFaceCardNO.toString());
-    if(getFaceCardNO!=null){
-      locater.appUser.faceCardNumber = getFaceCardNO+1;
-    }
-    notifyListeners();
 
-    print("Here is the getFacevard number:"+locater.appUser.faceCardNumber.toString());
 
+
+    // getFaceCardNO = locater.appUser.faceCardNumber;
+    // if(getFaceCardNO!=null){
+    //   locater.appUser.faceCardNumber = getFaceCardNO+1;
+    // }
+    // notifyListeners();
 
     await databaseServices.updateUserProfile(locater.appUser);
 
@@ -83,9 +85,7 @@ class SendZapsProvider extends BaseViewModal{
       cancelBtnText: ' ',
       confirmBtnColor:purpleColor,
       onConfirmBtnTap: ()  {
-
         Navigator.pop(ctx);
-
         Navigator.pushAndRemoveUntil<dynamic>(ctx, MaterialPageRoute<dynamic>(builder: (BuildContext context) => BottomNavigation(),),
               (route) => false,//if you want to disable back feature set to false
         );

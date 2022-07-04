@@ -73,11 +73,12 @@ class SettingScreen extends StatelessWidget {
                               padding: EdgeInsets.only(
                                 top: 5,
                               ),
-                              child: CircleAvatar(
-                                radius: 55.0,
-
-                                // backgroundImage: AssetImage(
-                                //     'assets/images/ani-kolleshi-7jjnJ-QA9fY-unsplash.jpg'),
+                              child:  CircleAvatar(
+                                radius: 55,
+                                backgroundImage:model.appUser.profileImage != null
+                                    ? NetworkImage("${model.appUser.profileImage}")
+                                    : AssetImage('assets/images/pregnant_img.png') as ImageProvider,
+                                child: Text(''),
                               ),
                             ),
                             SizedBox(height: 10,),
@@ -93,7 +94,7 @@ class SettingScreen extends StatelessWidget {
                             ),
 
                             SizedBox(height: 10),
-                            Text("Lorem ipsum dolor at amat, cooperate.",
+                            Text(model.locateUser.appUser.description==null?"Lorem ipsum dolor at amat, cooperate.":model.locateUser.appUser.description.toString(),
                               style: TextStyle(
                                   color: Colors.white, fontSize: 13),
                             ),
@@ -103,7 +104,7 @@ class SettingScreen extends StatelessWidget {
                       SizedBox(height: 25),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TopZapper(getZaps: model.locateUser.appUser.zaps,)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>TopZapper()));
                         },
                         child: Container(
                           height: 250,

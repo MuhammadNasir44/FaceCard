@@ -84,7 +84,7 @@ class SendZapsScreen extends StatelessWidget {
                                     Navigator.push(context,
 
                                         MaterialPageRoute(builder: (context) =>
-                                        ZipRequests(selectedUser:model.allAppUsers[index],getZaps: getZaps,)));
+                                        ZipRequests(selectedUser:model.allAppUsers[index],)));
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(top: 7),

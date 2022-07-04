@@ -5,6 +5,7 @@
 
 import 'package:face_card/core/constants/colors.dart';
 import 'package:face_card/core/constants/style.dart';
+import 'package:face_card/ui/screens/profile/edit_profile.dart';
 import 'package:face_card/ui/screens/profile/profile_provider.dart';
 import 'package:face_card/ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
 
                   GestureDetector(onTap: (() {}), child: Icon(Icons.menu)),
                   SizedBox(width: 20,),
-                  Text('Edit Profile'),
+                  Text('Profile'),
 
 
                 ],
@@ -38,7 +39,11 @@ class ProfileScreen extends StatelessWidget {
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
-                  child: GestureDetector(onTap: () {}, child: Icon(Icons.edit)),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
+                      }, 
+                      child: Icon(Icons.edit)),
                 ),
               ],
             ),
@@ -50,9 +55,9 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 80,
-                      backgroundImage: AssetImage(
-                        'images/batman.png',
-                      ),
+                      backgroundImage:model.appUser.profileImage != null
+                          ? NetworkImage("${model.appUser.profileImage}")
+                          : AssetImage('assets/images/pregnant_img.png') as ImageProvider,
                       child: Text(''),
                     ),
                     SizedBox(
@@ -68,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.white),
                           ),
                           Text(
-                            'Your Text Second Lines Goes Here',
+                            model.appUser.description==null?'Your Text Second Lines Goes Here':model.appUser.description.toString(),
                             style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(

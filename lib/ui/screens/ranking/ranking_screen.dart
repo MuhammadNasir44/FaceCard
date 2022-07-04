@@ -174,7 +174,7 @@ class RankingScreen extends StatelessWidget {
                                   fontSize: 16, color: Colors.black54),
                             ),
                             Text(
-                              "3",
+                              model.homeTownRanking.toString(),
                               style: TextStyle(
                                   fontSize: 16, color: Colors.black),
                             ),
@@ -195,7 +195,7 @@ class RankingScreen extends StatelessWidget {
                                   fontSize: 16, color: Colors.black54),
                             ),
                             Text(
-                              '8765th',
+                              model.worldRankingNumber.toString(),
                               style: TextStyle(
                                   fontSize: 16, color: Colors.black),
                             ),

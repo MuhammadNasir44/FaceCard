@@ -64,13 +64,32 @@ class DatabaseServices {
     return appUserList;
   }
 
+  Future<List<AppUser>> getWholeUsers() async {
+    final List<AppUser> appUserList = [];
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('AppUser').orderBy('faceCardNumber',descending: true)
+          .get();
+      if (snapshot.docs.length > 0) {
+        snapshot.docs.forEach((element) {
+          appUserList.add(AppUser.fromJson(element, element.id));
+          print("getUser => ${element['userName']}");
+        });
+      } else {
+        print("No data found");
+      }
+    } catch (e) {
+      print('Exception @DatabaseService/GetAllUsers $e');
+    }
+    return appUserList;
+  }
+
   ///
   /// get all app users
   ///
   Future<List<AppUser>> getTopThreeUsers() async {
     final List<AppUser> appUserList = [];
     try {
-      QuerySnapshot snapshot = await firebaseFireStore.collection('AppUser').orderBy('zaps',descending: true)
+      QuerySnapshot snapshot = await firebaseFireStore.collection('AppUser').orderBy('faceCardNumber',descending: true)
           .get();
       if (snapshot.docs.length > 0) {
         snapshot.docs.forEach((element) {
@@ -105,7 +124,7 @@ class DatabaseServices {
           .collection('AppUser')
           .doc(userId.toString())
           .update({
-        'zaps':zaps,
+        'faceCardNumber':zaps,
       });
     } catch (e) {
       print('Exception@UpdateUserProfile=>$e');

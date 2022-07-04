@@ -15,38 +15,38 @@ class PurchaseZaps extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
        backgroundColor:  Colors.purple,
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          print('Clicked...!');
-        },
-        child: Container(
-
-          height: 70,
-          margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-          decoration: BoxDecoration(
-              color: purpleColor,
-
-              borderRadius: BorderRadius.circular(10)),
-          child: Center(
-              child: RichText(
-                text: TextSpan(
-                    text: 'Get a million zaps & cash out ',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: '1000\$',
-                          style: TextStyle(
-                              color: Color(0xffF2C921), fontSize: 18),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-
-                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreens()));
-                              // navigate to desired screen
-                            }),
-                    ]),
-              ),),
-        ),
-      ),
+      // bottomNavigationBar: InkWell(
+      //   onTap: () {
+      //     print('Clicked...!');
+      //   },
+      //   child: Container(
+      //
+      //     height: 70,
+      //     margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
+      //     decoration: BoxDecoration(
+      //         color: purpleColor,
+      //
+      //         borderRadius: BorderRadius.circular(10)),
+      //     child: Center(
+      //         child: RichText(
+      //           text: TextSpan(
+      //               text: 'Get a million zaps & cash out ',
+      //               style: TextStyle(color: Colors.white, fontSize: 18),
+      //               children: <TextSpan>[
+      //                 TextSpan(
+      //                     text: '1000\$',
+      //                     style: TextStyle(
+      //                         color: Color(0xffF2C921), fontSize: 18),
+      //                     recognizer: TapGestureRecognizer()
+      //                       ..onTap = () {
+      //
+      //                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreens()));
+      //                         // navigate to desired screen
+      //                       }),
+      //               ]),
+      //         ),),
+      //   ),
+      // ),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Color(0xff5C2CC8),

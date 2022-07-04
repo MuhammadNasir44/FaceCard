@@ -1,4 +1,5 @@
 import 'package:face_card/core/constants/style.dart';
+import 'package:face_card/ui/screens/bottom_navigation/bottom_naigation.dart';
 import 'package:face_card/ui/screens/top_zapper/top_zipper_provider.dart';
 import 'package:face_card/ui/screens/ziprequests/zip_request_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,6 @@ import '../widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 class TopZapper extends StatelessWidget {
-
-  final getZaps;
-   TopZapper({this.getZaps});
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +29,10 @@ class TopZapper extends StatelessWidget {
                 leading: IconButton(
                   onPressed: (){
 
-                    Navigator.pop(context);
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavigation()));
+
+                    // Navigator.pop(context);
 
                   },
                   icon: Icon(Icons.arrow_back_ios_new),
@@ -78,22 +78,22 @@ class TopZapper extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    getZaps!=null?Navigator.push(
-                                        context, MaterialPageRoute(builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index],getZaps: getZaps,)))
-                                        :print("getzaps null");
-
+                                   Navigator.push(
+                                        context, MaterialPageRoute(builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index])));
 
                                     },
                                   child: Container(
                                     margin: EdgeInsets.only(top: 10),
                                     child: Row(
                                       children: [
-                                        const Padding(
+                                         Padding(
                                           padding: EdgeInsets.all(8.0),
-                                          child: CircleAvatar(
+                                          child:CircleAvatar(
                                             radius: 30,
-                                            // backgroundImage:
-                                            // AssetImage('images/person.jpg'),
+                                            backgroundImage:model.allAppUsers[index].profileImage.toString() != null
+                                                ? NetworkImage("${model.allAppUsers[index].profileImage.toString()}")
+                                                : AssetImage('assets/images/pregnant_img.png') as ImageProvider,
+                                            child: Text(''),
                                           ),
                                         ),
                                         Expanded(
@@ -189,7 +189,7 @@ class TopZapper extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index],getZaps: getZaps,)));
+                                            builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index],)));
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(top: 10),
