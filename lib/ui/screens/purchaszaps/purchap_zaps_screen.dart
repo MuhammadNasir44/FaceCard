@@ -131,12 +131,44 @@ class PurchaseZaps extends StatelessWidget {
                                   "assets/icons/multiplezips.svg",
                                   height: 80,
                                 ),
-                                Text(
-                                  "${sendZaps} Zaps",
+                                currentIndex==1?Text(
+                                  "50 Zaps",
                                   style: TextStyle(color: Colors.grey),
-                                ),
+                                ):currentIndex==2?Text(
+                                  "100 Zaps", style: TextStyle(color: Colors.grey)):currentIndex==3?
                                 Text(
-                                  "\$ ${charges}",
+                                    "500 Zaps",
+                                    style: TextStyle(color: Colors.grey),):currentIndex==4?Text(
+                                  "80,000 Zaps",
+                                  style: TextStyle(color: Colors.grey),):currentIndex==5?Text(
+                                  "250,000 Zaps",
+                                  style: TextStyle(color: Colors.grey),):Text(
+                                  "500,000 Zaps",
+                                  style: TextStyle(color: Colors.grey),),
+
+
+
+
+
+
+
+                                currentIndex==1?Text(
+                                  "\$ 0.50",
+                                  style: TextStyle(color: Colors.grey),
+                                ):currentIndex==2?Text(
+                                  "\$ 1.00",
+                                  style: TextStyle(color: Colors.grey),
+                                ):currentIndex==3?Text(
+                                  "\$ 5.00",
+                                  style: TextStyle(color: Colors.grey),
+                                ):currentIndex==4?Text(
+                                  "\$ 200.00",
+                                  style: TextStyle(color: Colors.grey),
+                                ):currentIndex==5?Text(
+                                  "\$ 500.00",
+                                  style: TextStyle(color: Colors.grey),
+                                ):Text(
+                                  "\$ 1000.00",
                                   style: TextStyle(color: Colors.grey),
                                 ),
                               ],

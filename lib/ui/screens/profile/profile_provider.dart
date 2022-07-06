@@ -40,15 +40,10 @@ class ProfileProvider extends BaseViewModal{
 
   ProfileProvider(){
     this.appUser = locateUser.appUser;
-
     nameController = TextEditingController(text: appUser.userName);
-
     descriptonController = TextEditingController(text: appUser.description);
     locationController = TextEditingController(text: appUser.userLocation);
     phoneNumberController = TextEditingController(text: appUser.phoneNumber);
-
-
-
   }
 
   pickImageFromGallery() async {

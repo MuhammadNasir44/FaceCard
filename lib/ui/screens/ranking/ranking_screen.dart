@@ -7,6 +7,7 @@
 
 import 'package:face_card/core/constants/colors.dart';
 import 'package:face_card/core/constants/style.dart';
+import 'package:face_card/ui/screens/ranking/ranking_detail.dart';
 import 'package:face_card/ui/screens/ranking/ranking_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -207,59 +208,72 @@ class RankingScreen extends StatelessWidget {
                   SizedBox(
                     height: 25,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 15, right: 15),
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          child: ListTile(
-                            title: Text(
-                              "Performance",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            trailing: Icon(Icons.arrow_drop_down_outlined),
+                  InkWell(
+                    onTap: (){
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>RankingDetailScreen()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 15, right: 15),
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: SfCartesianChart(
-                              primaryXAxis: CategoryAxis(
-                                maximumLabelWidth: 80,
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: ListTile(
+                              title: Text(
+                                "Performance",
+                                style: TextStyle(fontSize: 20),
                               ),
-                              series: <ChartSeries<ChartData, String>>[
-                                ColumnSeries<ChartData, String>(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomLeft,
-                                      colors: [Color(0xff5C2CC8), Colors.purple],
-                                  ),
-                                    color: purpleColor,
-                                    width: 0.2,
-                                    dataSource: model.chartData,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) => data.y
-                                ),
-                              ]
+                              trailing: Icon(Icons.arrow_drop_down_outlined),
+                            ),
                           ),
-                        ),
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>RankingDetailScreen()));
 
 
-                      ],
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: SfCartesianChart(
+                                  primaryXAxis: CategoryAxis(
+                                    maximumLabelWidth: 80,
+                                  ),
+                                  series: <ChartSeries<ChartData, String>>[
+                                    ColumnSeries<ChartData, String>(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomLeft,
+                                          colors: [Color(0xff5C2CC8), Colors.purple],
+                                      ),
+                                        color: purpleColor,
+                                        width: 0.2,
+                                        dataSource: model.chartData,
+                                        xValueMapper: (ChartData data, _) => data.x,
+                                        yValueMapper: (ChartData data, _) => data.y
+                                    ),
+                                  ]
+                              ),
+                            ),
+                          ),
+
+
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -18,6 +18,8 @@ class RankingProvider extends BaseViewModal{
 
 
 List<ChartData> chartData = [];
+
+List<ChartData> onlyCurrentUser = [];
 final databaseServices = DatabaseServices();
 
 List<AppUser> topThreeUserList = [];
@@ -26,12 +28,17 @@ List<AppUser> allUserList = [];
 List<AppUser> sameHomeTownList = [];
 int lengthOfHomeTown = 0;
 
+
+final locateUser = locator<AuthServices>();
+
 var appUser = AppUser();
 
 int worldRankingNumber=0;
 int homeTownRanking = 1;
 
 int limit =0;
+
+var getCurrentFaceCard =0.0;
 
 
   RankingProvider(){
@@ -45,7 +52,14 @@ int limit =0;
   getChartData()async{
     setState(ViewState.busy);
     topThreeUserList = await databaseServices.getTopThreeUsers();
+
+    if(locateUser.appUser.faceCardNumber!=null){
+      getCurrentFaceCard = locateUser.appUser.faceCardNumber!.toDouble();
+      
+      print("i am printing current user facecard number ==================> "+locator<AuthServices>().appUser.faceCardNumber.toString());
+    }
     limit = topThreeUserList.length>3?3:topThreeUserList.length;
+    onlyCurrentUser.add(ChartData(locator<AuthServices>().appUser.userName.toString(),getCurrentFaceCard));
     for(int i=0;i<limit;i++){
       chartData.add(ChartData(topThreeUserList[i].userName.toString(), topThreeUserList[i].faceCardNumber!.toDouble()),
 

@@ -69,10 +69,12 @@ class RecievedZaps extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
+
                                 // Navigator.push(
                                 //     context,
                                 //     MaterialPageRoute(
                                 //         builder: (context) => ZipRequests(selectedUser: model.allAppUsers[index],)));
+
                               },
                               child: Container(
                                 margin: EdgeInsets.only(top: 10),
